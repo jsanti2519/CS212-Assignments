@@ -31,7 +31,7 @@ public class Clock {
       return seconds;
    }
 
-   public String toString() {
+   public String toString() { 
 	   String hoursInText = Integer.toString(hours), minutesInText = Integer.toString(minutes), secondsInText = Integer.toString(seconds);
 	   if(hoursInText.length() == 1) hoursInText = '0' + hoursInText;
 	   if(minutesInText.length() == 1) minutesInText = '0' + minutesInText;
