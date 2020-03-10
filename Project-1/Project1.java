@@ -1,7 +1,4 @@
-import java.util.*;
-import javax.swing.*;
-import java.awt.*;
-
+import java.util.StringTokenizer;
 /** 
  * CSCI212 Object-Oriented Programming in Java
  * Project 1
@@ -13,6 +10,9 @@ import java.awt.*;
 public class Project1 {
 	static Clock[] clockObj = new Clock[200], //200 is an arbitrary number.
 			clockObjSorted = new Clock[200];
+	
+	static String unsort = "", sort = ""; //setting up strings to add to ClockGUI API.
+	//ClockGUI cannot access these strings if they are not declared as instance variables.
 	
 	
    public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class Project1 {
 
       while(line != null) {
          StringTokenizer foo = new StringTokenizer(line, ":");
-         int[] temp = new int[3]; //breaking tokens down to hours, minutes, seconds. (Can I do this???)
+         int[] temp = new int[3]; //breaking tokens down to hours, minutes, seconds.
          int i = 0;
          while(foo.hasMoreTokens()) {
             temp[i++] = Integer.parseInt(foo.nextToken());
@@ -53,24 +53,13 @@ public class Project1 {
    * see (line 56 to line 60)
    **/
 
-      String unsort = "", sort = "";
+      //String unsort = "", sort = "";
       for(int i = 0; clockObj[i] != null; i++) {
     	  unsort = unsort + clockObj[i] + "\n"; //assigning string values from Clock array for JFrame API
     	  sort = sort + clockObjSorted[i] + "\n";
       }
       
-      ClockGUI pane = new ClockGUI();
-      pane.setTitle("Project 1");
-      pane.setLayout(new GridLayout(1, 2));
-      JTextArea clockText = new JTextArea(unsort); //JLabel won't recognize a new line
-      pane.getContentPane().add(clockText, BorderLayout.WEST); //layout of sorted array in left side
-      clockText = new JTextArea(sort);
-      clockText.setEditable(false);
-      pane.getContentPane().add(clockText, BorderLayout.EAST); //layout of sorted array in right side
-      pane.setSize(1000, 1000);
-      pane.setLocation(100, 100);
-      pane.setDefaultCloseOperation(ClockGUI.EXIT_ON_CLOSE);
-      pane.setVisible(true);
+      ClockGUI.setClockGUI(); //calling the GUI method
    } //main method
    
   /**
@@ -116,6 +105,6 @@ public class Project1 {
 	   Clock temp = clockObjSorted[iteration];
 	   clockObjSorted[iteration] = clockObjSorted[test];
 	   clockObjSorted[test] = temp;
-   }
+   }//swap method
    
 } //class Project1
